@@ -11,6 +11,7 @@ using Songs2Learn.DAL;
 
 namespace Songs2Learn.Controllers
 {
+    [Authorize]
     public class ArtistsController : Controller
     {
         private ArtistDbContext db = new ArtistDbContext();

@@ -39,7 +39,7 @@ namespace Songs2Learn.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Songs2Learn";
 
             return View();
         }
