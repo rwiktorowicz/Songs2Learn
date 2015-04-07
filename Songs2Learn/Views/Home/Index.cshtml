@@ -1,0 +1,54 @@
+﻿@model Songs2Learn.Models.Track
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<div id="LandingButtonRow" class="row">
+        <div class="col-md-12 text-center verticle-center">
+            <p><a class="btn btn-primary btn-lg" href="#" id="firstGenerateBtn">Click to Generate &raquo;</a></p>
+        </div>
+    </div>*@
+<div id="TrackRow" class="row verticle-center">
+    <audio id="tracksample" src="@ViewBag.AudioURL"></audio>
+    <img src="@ViewBag.AlbumArtURL" id="album"
+         class="col-md-6 col-sm-6 col-xs-8 text-center img-responsive thumbnail" onclick="songPlay()" />
+    <div class="col-md-6 col-sm-6 col-xs-4 verticle-center">
+        <div class="text-center">
+            <h1><u>Artist</u></h1>
+            <p>@Model.Artist.Name</p>
+            <h1><u>Track</u></h1>
+            <p>@Model.Name</p>
+            <h1><u>Album</u></h1>
+            <p>@ViewBag.AlbumName</p>
+            <br />
+        </div>
+        <div class="row hidden-xs">
+            <div class="col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3">
+                <a href="@ViewBag.SpotifyURL" target="_blank"><img src="@Url.Content("~/Images/spotify.png")" class="img-responsive thumbnail darken" /></a>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <a href="@ViewBag.YoutubeURL" target="_blank"><img src="@Url.Content("~/Images/youtube.png")" class="img-responsive thumbnail darken" /></a>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <a href="@ViewBag.SongsterrURL" target="_blank"><img src="@Url.Content("~/Images/songsterr.jpg")" class="img-responsive thumbnail darken" /></a>
+            </div>
+        </div>
+        <div class="row hidden-xs">
+            @Html.ActionLink("Generate New Track", "Index", new { }, new { @class = "btn btn-lg col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3" })
+        </div>
+    </div>
+    <div class="row hidden-lg hidden-md hidden-sm">
+        <div class="col-xs-2 col-xs-offset-3">
+            <a href="@ViewBag.SpotifyURL" target="_blank"><img src="@Url.Content("~/Images/spotify.png")" class="thumbnail" /></a>
+        </div>
+        <div class="col-xs-2">
+            <a href="@ViewBag.YoutubeURL" target="_blank"><img src="@Url.Content("~/Images/youtube.png")" class="thumbnail" /></a>
+        </div>
+        <div class="col-xs-2">
+            <a href="@ViewBag.SongsterrURL" target="_blank"><img src="@Url.Content("~/Images/songsterr.jpg")" class="thumbnail" /></a>
+        </div>
+    </div>
+    <div class="row hidden-lg hidden-md hidden-sm">
+        @Html.ActionLink("Generate New Track", "Index", null, new { @class = "btn btn-lg col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3" })
+    </div>
+</div>
