@@ -10,18 +10,33 @@ using Songs2Learn.Classes;
 
 namespace Songs2Learn.Controllers
 {
-    public class HomeController : AsyncController
+    public class HomeController : Controller
     {
         private ArtistDbContext db = new ArtistDbContext();
+        private Random rand = new Random();
 
         public ActionResult Index()
         {
-            //SpotifyWebAPIClass test = new SpotifyWebAPIClass();
+            //Initial selection of random Artist.
+            int artistid = rand.Next(1, db.Artists.Count() + 1);
+            Artist Artist = (from a in db.Artists
+                          where a.ID == artistid
+                          select a).FirstOrDefault();
 
-            var Track = (from t in db.Tracks
-                         orderby Guid.NewGuid()
-                         select t).FirstOrDefault();
+            //If the artist does not have any tracks in the database, continue selecting a random artist until you get one that does.
+            while (Artist.Tracks.Count == 0)
+            {
+                artistid = rand.Next(1, db.Artists.Count() + 1);
+                Artist = (from a in db.Artists
+                          where a.ID == artistid
+                          select a).FirstOrDefault();
+            }
 
+            //Make a random track selection from what the artist has in the database.
+            int trackindex = rand.Next(0, Artist.Tracks.Count);
+            Track Track = Artist.Tracks.ElementAt(trackindex);
+                          
+            //Pulling information from Spotify.
             SpotifyTrackData SpotifyTrackData = new SpotifyTrackData(Track.Artist.Name, Track.Name);
 
             ViewBag.AlbumArtURL = SpotifyTrackData.AlbumArtURL;
@@ -44,11 +59,5 @@ namespace Songs2Learn.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
